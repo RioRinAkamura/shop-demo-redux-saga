@@ -67,11 +67,13 @@ const Dashboard = (props: Props) => {
           label="Sport Product" 
           value={statistics.sportCount}/>
         </Grid>
+
+        
       </Grid>
 
       {/* Product ranking */}
       <Box mt={4}>
-        <Typography variant="h5">Product</Typography>
+        <Typography variant="h4">Product</Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={6}>
             <Widget title="Top expensive Products">

@@ -6,10 +6,10 @@ import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 function App() {
-  useEffect(()=>{
-    categoryApi.getAll().then((response)=>console.log(response));
+  // useEffect(()=>{
+  //   categoryApi.getAll().then((response)=>console.log(response));
 
-  })
+  // })
 
   return (
     <div>

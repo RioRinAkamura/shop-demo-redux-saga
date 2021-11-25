@@ -64,3 +64,24 @@ Product slice state:
 ADD/ EDIT
  - React hook form v7
  - Yup: validation
+
+ROUTINGS
+- /admin/products/add: add new product
+- /admin/products/:productId: update product
+
+Product Form
+- Mode: add/edit
+Initial values:
+-Values:
+    -name: text input
+    - color: Text input
+    - Price: number input
+    - categoryId: select
+
+- Validations: all required
+    - name: at least 1 word
+    - color: at least 1 word
+    - price: > 1$
+    - category: required
+
+- Submission: redirect to product list page after submitting succesfully

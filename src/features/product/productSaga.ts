@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "@redux-saga/core/effects";
+import { call, debounce, put, takeLatest } from "@redux-saga/core/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import productApi from "api/productApi";
 import { ListParams, ListResponse, Product } from "models";
@@ -16,7 +16,15 @@ function* fetchProductList(action: PayloadAction<ListParams>){
 
 }
 
+function* handleSearchDeboune(action: PayloadAction<ListParams>){
+    console.log('product saga');
+    
+    yield put(productActions.setFilter(action.payload));
+}
+
 export default function* productSaga(){
-    //watch fetch product action
+
     yield takeLatest(productActions.fetchProductList, fetchProductList)
+
+    yield debounce(500, productActions.setFilterWithDebounce.type, handleSearchDeboune)
 }

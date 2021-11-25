@@ -8,6 +8,7 @@ import { combineReducers } from 'redux'
 import { history } from 'utils';
 import dashboardReducer from 'features/dashboard/dashboardSlice';
 import productReducer from 'features/product/productSlice';
+import categoryReducer from 'features/category/categorySlice';
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   dashboard: dashboardReducer,
   product: productReducer,
+  category: categoryReducer,
  
 })
 

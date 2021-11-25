@@ -6,15 +6,15 @@ import { push } from "connected-react-router";
 function* handleLogin(payload: LoginPayload){
     try {
         console.log('Handle Login', payload);
-        yield delay(900)  // call api
+        yield delay(700)
         localStorage.setItem('access_token', 'fake_login')
 
         yield put(authActions.loginSuccess({
             id: 1,
             name: 'Rio'
         }))
-        //redirect to admin page
-        yield put(push('/admin'))
+      
+        yield put(push('/admin/dashboard'))
 
     } catch (error: any) {
         yield put(authActions.loginFailed(error.message)) 
