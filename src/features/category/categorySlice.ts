@@ -35,12 +35,19 @@ export const categoryActions = categorySlice.actions;
 
 //selectors
 export const selectCategoryList = (state:RootState)=>state.category.list;
+
 export const selectCategoryMap = createSelector(selectCategoryList, (categoryList) =>
     categoryList.reduce((map : {[key:string] : Category}, category) => {
         map[category.id] = category
             return map;
         },{})
     );
+
+export const selectCategoryOptions = createSelector(selectCategoryList, (categoryList) =>
+    categoryList.map(category => ({
+        label: category.name,
+        value: category.id
+    })))
 
 //reducer
 const categoryReducer = categorySlice.reducer;

@@ -4,6 +4,7 @@ import { HomeWork, ImportContacts, PhoneAndroid, SportsBaseball } from '@materia
 import { Grid, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import ProductCheapList from './components/ProductCheapList';
 import ProductRankingList from './components/ProductRankingList';
 import StatisticItem from './components/StatisticItem';
@@ -29,6 +30,8 @@ const Dashboard = (props: Props) => {
   useEffect(()=>{
     dispatch(dashboardActions.fetchData())
   },[dispatch])
+
+  const {t} = useTranslation()
 
   return (
     <Box>
@@ -73,15 +76,15 @@ const Dashboard = (props: Props) => {
 
       {/* Product ranking */}
       <Box mt={4}>
-        <Typography variant="h4">Product</Typography>
+        <Typography variant="h4">{t("product")}</Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={6}>
-            <Widget title="Top expensive Products">
+            <Widget title={t("TOP EXPENSIVE PRODUCTS")}>
               <ProductRankingList productList={highestProductList}/>
             </Widget>
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
-            <Widget title="Top cheap Products">
+            <Widget title={t("TOP CHEAP PRODUCTS")}>
               <ProductCheapList productList={lowestProductList}/>  
             </Widget>
           </Grid>

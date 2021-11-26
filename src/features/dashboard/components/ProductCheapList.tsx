@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Product } from 'models';
+import { useTranslation } from 'react-i18next';
 
 export interface ProductCheapListProps{
     productList: Product[]
@@ -43,14 +44,16 @@ const useStyles = makeStyles({
 export default function ProductCheapList ({productList}: ProductCheapListProps) {
   const classes = useStyles();
 
+  const {t}= useTranslation()
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>#</StyledTableCell>
-            <StyledTableCell align="left">Product name</StyledTableCell>
-            <StyledTableCell align="right">Price</StyledTableCell>
+            <StyledTableCell align="left">{t("name")}</StyledTableCell>
+            <StyledTableCell align="right">{t("price")}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -7,9 +7,12 @@ import { selectCategoryList, selectCategoryMap } from 'features/category/categor
 import { ListParams, Product } from 'models'
 import { useEffect } from 'react'
 import { Link, useRouteMatch, useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import ProductFilters from '../components/ProductFilters'
 import ProductTable from '../components/ProductTable'
 import { productActions, selectProductFilter, selectProductList, selectProductPagination } from '../productSlice'
+import { useTranslation } from 'react-i18next';
+
 
 const useStyles = makeStyles(theme=>({
     root:{
@@ -43,6 +46,7 @@ const ListPage = (props: ListPageProps) => {
     const filter = useAppSelector(selectProductFilter)
     const categoryMap = useAppSelector(selectCategoryMap)
     const categoryList = useAppSelector(selectCategoryList)
+    const { t } = useTranslation();
 
     useEffect(()=>{
         dispatch(productActions.fetchProductList(filter))
@@ -68,6 +72,8 @@ const ListPage = (props: ListPageProps) => {
         try {
             //Remove prodtuc Api
             await productApi.remove(product?.id || '');
+            
+            toast.success('Remove product success')
 
             const newFilter = {...filter}
             dispatch(productActions.setFilter(newFilter))
@@ -87,7 +93,7 @@ const ListPage = (props: ListPageProps) => {
     return (
         <Box className={classes.root}>
             <Box className={classes.titleContainer}>
-                <Typography variant="h4">Products</Typography>
+                <Typography variant="h4">{t("product")}</Typography>
 
                 <Link to={`${match.url}/add`} style={{textDecoration: 'none'}}>
                     <Button variant="contained" color="primary">Add Product</Button>
@@ -116,7 +122,7 @@ const ListPage = (props: ListPageProps) => {
                     shape="rounded"
                     count={Math.ceil(pagination._totalRows / pagination._limit)} 
                     page={pagination._page} 
-                    onChange={handlePageChange} 
+                    onChange={handlePageChange}
                 />
             </Box>
         </Box>

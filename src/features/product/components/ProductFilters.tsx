@@ -3,6 +3,7 @@ import { Category, ListParams } from 'models'
 import React, { ChangeEvent, FormEvent, useRef } from 'react'
 import SearchIcon from '@material-ui/icons/Search';
 import LayersClearIcon from '@material-ui/icons/LayersClear';
+import { useTranslation } from 'react-i18next';
 
 
 export interface ProductFiltersProps {
@@ -34,6 +35,7 @@ const useStyles = makeStyles(theme=>({
 const ProductFilters = ({filter, categoryList, onChange, onSearchChange}: ProductFiltersProps) => {
     const classes = useStyles()
     const searchRef = useRef<HTMLInputElement>()
+    const {t} = useTranslation()
     
     const handleSearchChange=(e: ChangeEvent<HTMLInputElement>)=>{
         if (!onSearchChange) return;
@@ -108,7 +110,7 @@ const ProductFilters = ({filter, categoryList, onChange, onSearchChange}: Produc
                     {/* Search */}
                     <Paper component="form" className={classes.search} onSubmit={handleSearch}>
                         <InputBase
-                            placeholder="Search Product"
+                            placeholder={t("search product")}
                             className={classes.input}
                             defaultValue={filter.name_like || ''}
                             onChange = {handleSearchChange}
@@ -123,7 +125,7 @@ const ProductFilters = ({filter, categoryList, onChange, onSearchChange}: Produc
                 {/* Filter by category */}
                 <Grid item xs={12} md={2} lg={2}>
                     <FormControl variant="outlined" fullWidth size="small">
-                        <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
+                        <InputLabel id="demo-simple-select-outlined-label">{t("categories")}</InputLabel>
                         <Select
                             labelId="demo-simple-select-outlined-label"
                             id="demo-simple-select-outlined"
@@ -144,21 +146,21 @@ const ProductFilters = ({filter, categoryList, onChange, onSearchChange}: Produc
                 {/* Sort by price */}
                 <Grid item xs={12} md={2} lg={2}>
                     <FormControl variant="outlined" fullWidth size="small">
-                        <InputLabel id="sortBy">Sort</InputLabel>
+                        <InputLabel id="sortBy">{t("sortBy")}</InputLabel>
                         <Select
                             labelId="demo-simple-select-outlined-label"
                             id="demo-simple-select-outlined"
                             value={filter._sort ? `${filter._sort}.${filter._order}` : ''}
                             onChange={handleSortChange}
-                            label="Sort"
+                            label={t("sortBy")}
                         >
                         <MenuItem value="">
-                            <em>No sort</em>
+                            <em>{t("No sort")}</em>
                         </MenuItem>
-                            <MenuItem value="name.asc" >Name ASC</MenuItem>
-                            <MenuItem value="name.desc" >Name DESC</MenuItem>
-                            <MenuItem value="price.asc" >Price ASC</MenuItem>
-                            <MenuItem value="price.desc" >Price DESC</MenuItem>
+                            <MenuItem value="name.asc" >{t("Name A-Z")}</MenuItem>
+                            <MenuItem value="name.desc" >{t("Name Z-A")}</MenuItem>
+                            <MenuItem value="price.asc" >{t("Price ASC")}</MenuItem>
+                            <MenuItem value="price.desc" >{t("Price DESC")}</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
@@ -172,7 +174,7 @@ const ProductFilters = ({filter, categoryList, onChange, onSearchChange}: Produc
                         fullWidth
                         onClick={handleClearFilter}
                     >
-                        Clear Filter
+                        {t("Clear Filter")}
                     </Button>
                     
                 </Grid>

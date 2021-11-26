@@ -12,6 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { Button, DialogContentText } from '@mui/material';
 import { Category, Product } from 'models';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface ProductTabletProps{
     productList: Product[];
@@ -67,6 +68,7 @@ export default function ProductTable({productList, categoryMap,  onEdit, onRemov
       const classes = useStyles();
       const [open, setOpen] = useState(false);
       const [selectedProduct, setSelectedProduct] = useState<Product>();
+      const {t} = useTranslation()
 
       const handleClose = () => {
         setOpen(false);
@@ -93,13 +95,13 @@ export default function ProductTable({productList, categoryMap,  onEdit, onRemov
     <Table className={classes.table} aria-label="customized table">
       <TableHead>
         <TableRow>
-          <StyledTableCell>Product ID</StyledTableCell>
-          <StyledTableCell align="left">Product name</StyledTableCell>
-          <StyledTableCell align="left">Color</StyledTableCell>
-          <StyledTableCell align="left">Category</StyledTableCell>
-          <StyledTableCell align="right">Price($)</StyledTableCell>
-          <StyledTableCell align="left">ThumnailUrl</StyledTableCell>
-          <StyledTableCell align="right">Actions</StyledTableCell>
+          <StyledTableCell>{t("product id")}</StyledTableCell>
+          <StyledTableCell align="left">{t("product name")}</StyledTableCell>
+          <StyledTableCell align="left">{t("color")}</StyledTableCell>
+          <StyledTableCell align="left">{t("Category")}</StyledTableCell>
+          <StyledTableCell align="right">{t("price")}($)</StyledTableCell>
+          <StyledTableCell align="left">{t("thumnailUrl")}</StyledTableCell>
+          <StyledTableCell align="right">{t("actions")}</StyledTableCell>
         </TableRow>
       </TableHead>
       <TableBody>

@@ -1,7 +1,9 @@
 import { ConnectedRouter } from 'connected-react-router';
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
+import i18n from 'translation/i18n';
 import { history } from 'utils';
 import App from './App';
 import { store } from './app/store';
@@ -13,9 +15,14 @@ ReactDOM.render(
     <Provider store={store}>
       {/* <BrowserRouter> */}
         <ConnectedRouter history={history}>
-        <App />
+          <I18nextProvider i18n={i18n}>
+            <Suspense fallback={<div>loading</div>}>
+              <App />
+            </Suspense>
+          </I18nextProvider>
         </ConnectedRouter>
       {/* </BrowserRouter> */}
+      
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -18,7 +18,7 @@ const productApi={
     },
 
     update(data: Product):Promise<Product> {
-        const url='/products'
+        const url=`/products/${data.id}`
         return axiosClient.patch(url, data);
     },
 

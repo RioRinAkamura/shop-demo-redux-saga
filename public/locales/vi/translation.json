@@ -1,0 +1,25 @@
+{
+
+        "product": "Sản phẩm",
+        "categories": "Danh mục",
+        "dashboard": "Bảng điều khiển",
+        "name": "Tên sản phẩm",
+        "color": "Màu sắc",
+        "price": "Giá",
+        "thumnailUrl": "Hình ảnh",
+        "actions": "Hành động" ,
+        "search product": "Tìm kiếm sản phẩm",
+        "sortBy": "Sắp xếp",
+        "product id": "Mã sản phẩm",
+        "product name": "Tên sản phẩm",
+        "Name A-Z": "Tên A-Z",
+        "Name Z-A": "Tên Z-A",
+        "Price ASC": "Giá ASC",
+        "Price DESC": "Giá DESC",
+        "Clear Filter": "Bỏ lọc",
+        "No sort":"Không sắp xếp",
+        "Category": "Danh mục",
+        "TOP EXPENSIVE PRODUCTS": "TOP SẢN PHẨM GIÁ CAO",
+        "TOP CHEAP PRODUCTS": "TOP SẢN PHẨM GIÁ THẤP"
+   
+}

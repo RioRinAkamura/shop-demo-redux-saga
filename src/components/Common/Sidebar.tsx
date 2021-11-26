@@ -8,6 +8,10 @@ import LocalMallIcon from '@material-ui/icons/LocalMall';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import CategoryIcon from '@material-ui/icons/Category';
+import 'react-i18next';
+import { useTranslation } from 'react-i18next';
+
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Sidebar = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <div className={classes.root}>
@@ -41,7 +46,7 @@ export const Sidebar = () => {
             <ListItemIcon>
               <DashboardIcon color="primary"/>
             </ListItemIcon>
-            <ListItemText primary="Dashboard" />
+            <ListItemText primary={t("dashboard")} />
           </ListItem>
         </NavLink>
 
@@ -50,7 +55,7 @@ export const Sidebar = () => {
             <ListItemIcon>
               <LocalMallIcon color="primary"/>
             </ListItemIcon>
-            <ListItemText primary="Products" />
+            <ListItemText primary={t("product")} />
           </ListItem>
         </NavLink>
 
@@ -59,7 +64,7 @@ export const Sidebar = () => {
             <ListItemIcon>
               <CategoryIcon color="primary"/>
             </ListItemIcon>
-            <ListItemText primary="Categories" />
+            <ListItemText primary={t("categories")} />
           </ListItem>
         </NavLink>
       </List>

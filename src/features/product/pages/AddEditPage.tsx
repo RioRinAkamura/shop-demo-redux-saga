@@ -1,11 +1,12 @@
-import { Box, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { makeStyles } from '@material-ui/core';
 import { ChevronLeft } from '@material-ui/icons';
-import { Product } from 'models';
+import { Box, Typography } from '@mui/material';
 import productApi from 'api/productApi';
+import { Product } from 'models';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import ProductForm from '../components/ProductForm';
 
 export interface AddEditPageProps {}
 
@@ -19,6 +20,7 @@ const useStyles = makeStyles(theme =>({
 
 
 const AddEditPage = (props: AddEditPageProps) => {
+    const history = useHistory()
 
     const classes = useStyles()
     const {productId} = useParams<{productId: string}>()
@@ -41,7 +43,29 @@ const AddEditPage = (props: AddEditPageProps) => {
 
     },[productId]);
 
-    console.log('Found Product', product);
+    const handleProductFormSubmit = async (formValues: Product)=>{
+        //Call api to add, edit product info
+        if(isEdit){
+            await productApi.update(formValues)
+        } else{
+            await productApi.add(formValues)
+        }
+
+        // const message = isEdit ? 'Edit product success': 'Add product succes';
+        toast.success('Save product success')
+
+        //Redirect to productsList
+        history.push('/admin/products')
+    }
+
+    const initialValues: Product ={
+        name: '',
+        color: '',
+        price: '',
+        categoryId: '',
+        thumnailUrl: '',
+        ...product,
+    } as Product
     
 
     return (
@@ -55,6 +79,15 @@ const AddEditPage = (props: AddEditPageProps) => {
             <Typography variant="h5">
                 {isEdit ? 'Update Product' : 'Add new product'}
             </Typography>
+
+            {(!isEdit || Boolean(product)) &&(
+                <Box mt={3}>
+                    <ProductForm 
+                        initialValues={initialValues} 
+                        onSubmit={handleProductFormSubmit}
+                    />
+                </Box>
+            )}
 
         </Box>
     )
