@@ -36,6 +36,7 @@ export const Header = (props: HeaderProps) => {
     const classes = useStyles();
     const dispatch = useAppDispatch();
     const { i18n } = useTranslation();
+    const {t} = useTranslation()
 
     const handleChangeLang=(lang: string)=>{
       i18n.changeLanguage(lang)
@@ -45,7 +46,7 @@ export const Header = (props: HeaderProps) => {
             <AppBar position="static" >
                 <Toolbar>
                 <Typography variant="h6" className={classes.title}>
-                    AKA Shop
+                    AKA
                 </Typography>
 
                 <Button className={classes.langBtn} onClick={()=> handleChangeLang('en')}>en</Button>
@@ -56,7 +57,7 @@ export const Header = (props: HeaderProps) => {
                     color="inherit" 
                     onClick={()=> dispatch(authActions.logout())}
                     >
-                        Logout
+                        {t("Logout")}
                     </Button>
                 </Toolbar>
             </AppBar>

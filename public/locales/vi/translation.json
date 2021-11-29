@@ -20,6 +20,15 @@
         "No sort":"Không sắp xếp",
         "Category": "Danh mục",
         "TOP EXPENSIVE PRODUCTS": "TOP SẢN PHẨM GIÁ CAO",
-        "TOP CHEAP PRODUCTS": "TOP SẢN PHẨM GIÁ THẤP"
+        "TOP CHEAP PRODUCTS": "TOP SẢN PHẨM GIÁ THẤP",
+        "Logout": "Đăng xuất",
+        "Add Product": "Thêm sản phẩm",
+        "Product List": "Danh sách sản phẩm",
+        "Update Product": "Cập nhật sản phẩm",
+        "Add new product": "Thêm sản phẩm"
+
+
+        
+
    
 }

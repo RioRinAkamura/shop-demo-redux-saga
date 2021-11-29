@@ -21,7 +21,12 @@
         "No sort":"No sort",
         "Category": "Category",
         "TOP EXPENSIVE PRODUCTS": "TOP EXPENSIVE PRODUCTS",
-        "TOP CHEAP PRODUCTS": "TOP CHEAP PRODUCTS"
+        "TOP CHEAP PRODUCTS": "TOP CHEAP PRODUCTS",
+        "Logout": "Logout",
+        "Add Product": "Add Product",
+        "Product List": "Product List",
+        "Update Product": "Update Product",
+        "Add new product": "Add new product"
 
 
    

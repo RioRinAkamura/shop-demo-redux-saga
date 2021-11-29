@@ -36,7 +36,7 @@ const Dashboard = (props: Props) => {
   return (
     <Box>
       {/* Static section */}
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}>
 
         <Grid item xs={12} md={6} lg={3} xl={3}>
           <StatisticItem 
@@ -72,7 +72,7 @@ const Dashboard = (props: Props) => {
         </Grid>
 
         
-      </Grid>
+      </Grid> */}
 
       {/* Product ranking */}
       <Box mt={4}>

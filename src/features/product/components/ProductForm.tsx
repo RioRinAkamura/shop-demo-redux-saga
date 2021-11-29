@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { CircularProgress } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -18,6 +19,7 @@ export interface ProductFormProps {
 }
 
 const ProductForm = ({initialValues, onSubmit}: ProductFormProps) => {
+    const {t} = useTranslation()
     const [error, setError] = useState<string>('')
 
     const schema = yup.object({
@@ -53,10 +55,10 @@ const ProductForm = ({initialValues, onSubmit}: ProductFormProps) => {
         <Box maxWidth={400}>
             <form onSubmit={handleSubmit(handleFormSubmit)}>
                 {/* Form field */}
-                <InputField name="name" control={control} label="Product's name"/>
-                <InputField name="color" control={control} label="Color"/>
-                <InputField name="price" control={control} label="Price" type="number" />
-                <SelectField name="categoryId" control={control} label="Category" options={caetgoryOptions}/>
+                <InputField name="name" control={control} label={t("product name")}/>
+                <InputField name="color" control={control} label={t("color")}/>
+                <InputField name="price" control={control} label={t("price")} type="number" />
+                <SelectField name="categoryId" control={control} label={t("categories")} options={caetgoryOptions}/>
                 
                 {error && <Alert severity="error">{error}</Alert>}
                 <Box mt={2}>

@@ -96,7 +96,7 @@ const ListPage = (props: ListPageProps) => {
                 <Typography variant="h4">{t("product")}</Typography>
 
                 <Link to={`${match.url}/add`} style={{textDecoration: 'none'}}>
-                    <Button variant="contained" color="primary">Add Product</Button>
+                    <Button variant="contained" color="primary">{t("Add Product")}</Button>
                 </Link>
 
             </Box>

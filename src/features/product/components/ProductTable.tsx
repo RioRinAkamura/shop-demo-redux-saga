@@ -95,13 +95,13 @@ export default function ProductTable({productList, categoryMap,  onEdit, onRemov
     <Table className={classes.table} aria-label="customized table">
       <TableHead>
         <TableRow>
-          <StyledTableCell>{t("product id")}</StyledTableCell>
+          <StyledTableCell width={222}>{t("product id")}</StyledTableCell>
           <StyledTableCell align="left">{t("product name")}</StyledTableCell>
           <StyledTableCell align="left">{t("color")}</StyledTableCell>
           <StyledTableCell align="left">{t("Category")}</StyledTableCell>
           <StyledTableCell align="right">{t("price")}($)</StyledTableCell>
           <StyledTableCell align="left">{t("thumnailUrl")}</StyledTableCell>
-          <StyledTableCell align="right">{t("actions")}</StyledTableCell>
+          <StyledTableCell align="left" width={82}>{t("actions")}</StyledTableCell>
         </TableRow>
       </TableHead>
       <TableBody>

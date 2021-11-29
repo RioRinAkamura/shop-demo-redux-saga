@@ -6,10 +6,10 @@ import { dashboardActions } from './dashboardSlice';
 
 function* fetchStatistics(){
     const responseList: Array<ListResponse<Product>> = yield all([
-        call(productApi.getAll, { _page: 1, _limit: 1, _categoryId: '3752d0c9-556f-4832-a4e2-6cefd7f6a105' }),
-        call(productApi.getAll, { _page: 1, _limit: 1, _categoryId: '153cd45b-9bb5-408a-a005-fd4deb48ef89' }),
-        call(productApi.getAll, { _page: 1, _limit: 1, _categoryId: '043690d0-0176-42b3-bf1a-8e8272579be6' }),
-        call(productApi.getAll, { _page: 1, _limit: 1, _categoryId: '36e37395-4813-4af0-95aa-b5c9cd131416' }),
+        call(productApi.getAll, { _page: 1, _limit: 1, _categoryId: '' }),
+        call(productApi.getAll, { _page: 1, _limit: 1, _categoryId: '' }),
+        call(productApi.getAll, { _page: 1, _limit: 1, _categoryId: '' }),
+        call(productApi.getAll, { _page: 1, _limit: 1, _categoryId: '' }),
 
     ]);
 

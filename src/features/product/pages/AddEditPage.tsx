@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ProductForm from '../components/ProductForm';
+import { useTranslation } from 'react-i18next';
 
 export interface AddEditPageProps {}
 
@@ -26,6 +27,7 @@ const AddEditPage = (props: AddEditPageProps) => {
     const {productId} = useParams<{productId: string}>()
     const isEdit = Boolean(productId)
     const [product, setProduct] = useState<Product>()
+    const {t} = useTranslation()
 
     useEffect(()=>{
         if(!productId) return;
@@ -72,12 +74,13 @@ const AddEditPage = (props: AddEditPageProps) => {
         <Box>
             <Link to="/admin/products" className={classes.backLink}>
                 <Typography variant="caption" style={{display: 'flex', alignItems:'center', fontSize: '16px'}} mb={2}>
-                    <ChevronLeft/> Product List
+                    <ChevronLeft/> {t("Product List")}
                 </Typography>
             </Link>
 
             <Typography variant="h5">
-                {isEdit ? 'Update Product' : 'Add new product'}
+                {/* {isEdit ? 'Update Product' : 'Add new product'}  */}
+                {isEdit ? t("Update Product") : t("Add new product") } 
             </Typography>
 
             {(!isEdit || Boolean(product)) &&(
