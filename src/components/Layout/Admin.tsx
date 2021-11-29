@@ -3,6 +3,7 @@
 import { makeStyles } from '@material-ui/core';
 import { Box } from '@mui/material';
 import { Header, Sidebar } from 'components/Common';
+import Category from 'features/category/Category';
 import  Dashboard  from 'features/dashboard/Dashboard';
 import {Product} from 'features/product/Product';
 import React from 'react';
@@ -57,6 +58,10 @@ export const AdminLayout = () => {
 
                     <Route path="/admin/products">
                         <Product/>
+                    </Route>
+
+                    <Route path="/admin/categories">
+                        <Category />
                     </Route>
                 </Switch>
             </Box>

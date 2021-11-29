@@ -113,7 +113,12 @@ const ListPage = (props: ListPageProps) => {
 
 
             {/* Product table */}
-            <ProductTable productList={productList} categoryMap={categoryMap} onRemove={handleRemoveProduct} onEdit={handleEditProduct}/>
+            <ProductTable 
+                productList={productList} 
+                categoryMap={categoryMap} 
+                onRemove={handleRemoveProduct} 
+                onEdit={handleEditProduct}
+            />
 
             {/* Pagination */}
             <Box className={classes.pagination}>
