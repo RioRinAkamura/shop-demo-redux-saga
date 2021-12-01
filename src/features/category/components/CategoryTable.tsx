@@ -1,4 +1,4 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@material-ui/core';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -10,22 +10,18 @@ import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Box, Button, DialogContentText, Typography } from '@mui/material';
-import { AxiosResponse } from 'axios';
 import { Category } from 'models';
 import React, { useState } from 'react';
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 import { useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
+import { useCategoriesData, useRemoveCategoryData } from '../hooks/useCategoriesData';
 
 
 
 export interface CategoryTableProps{
-    categoryList: Category[],
-    refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<AxiosResponse<any, any>, unknown>>
 
-    onEdit?: (category: Category) => void;
-    onRemove?: (category: Category) => void;
 }
+
 
 
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -63,7 +59,7 @@ const useStyles = makeStyles({
 });
     
 
-const CategoryTable = ({ categoryList, refetch, onEdit, onRemove } : CategoryTableProps ) => {
+const CategoryTable = () => {
     const history = useHistory();
     const classes = useStyles();
     const match = useRouteMatch();
@@ -74,17 +70,36 @@ const CategoryTable = ({ categoryList, refetch, onEdit, onRemove } : CategoryTab
     const handleClose=()=>{
         setOpen(false);
     }
-    
 
-    const handleRemoveConfirm=(category: Category)=>{
-        onRemove?.(category)
-        setOpen(false)
+    const onSuccess = (data: any)=>{
+      // console.log('success :', data);
+      
     }
+    const onError = ()=>{}
 
+    //fetch data
+    const {data} = useCategoriesData({onSuccess, onError})
+    console.log('data: ',data);
+    
+    
+    //remove
+    const {mutate: removeCate} = useRemoveCategoryData()
     const handleRemoveClick=(category: Category)=>{
         setOpen(true)
+        setSelectedCategory(category)
+        // console.log(category.id);
+               
+        
     }
 
+    const handleRemoveConfirm=(category: Category)=>{
+      // const categoryRemove = {category}
+      const categoryId = category.id
+      removeCate(categoryId) 
+      setOpen(false)
+    }
+
+    //edit
     const handleEditClick= async(category: Category)=>{
       history.push(`${match.url}/${category.id}`)
     }
@@ -109,11 +124,11 @@ const CategoryTable = ({ categoryList, refetch, onEdit, onRemove } : CategoryTab
           </TableRow>
         </TableHead>
         <TableBody>
-          {categoryList && categoryList.map((category, index) => (
-            <StyledTableRow key={category.id}>
+          {data && data.map((category: Category, index: number) => (
+            <StyledTableRow key={category?.id}>
               <StyledTableCell align="left">{index + 1}</StyledTableCell>
-              <StyledTableCell align="left">{category.id}</StyledTableCell>
-              <StyledTableCell align="left">{category.name}</StyledTableCell>
+              <StyledTableCell align="left">{category?.id}</StyledTableCell>
+              <StyledTableCell align="left">{category?.name}</StyledTableCell>
               <StyledTableCell>
                     <EditIcon className={classes.action} color="primary" onClick={()=> handleEditClick(category)}/>&nbsp;
                     <DeleteIcon className={classes.action} color="secondary" onClick={()=> handleRemoveClick(category)}/>
@@ -131,20 +146,11 @@ const CategoryTable = ({ categoryList, refetch, onEdit, onRemove } : CategoryTab
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">Remove product?</DialogTitle>
+            <DialogTitle id="alert-dialog-title">Remove category?</DialogTitle>
             <DialogContent>
             <DialogContentText id="alert-dialog-description">
-                Are you sure to remove product? <br/>
+                Are you sure to remove category? <br/>
                 <b>{selectedCategory?.name} </b>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="categoryId"
-                  label="categoryId"
-                  type="text"
-                  fullWidth
-                  value={selectedCategory?.id}
-                />
             </DialogContentText>
             </DialogContent>
             <DialogActions>

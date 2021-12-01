@@ -3,6 +3,7 @@
     
         "product": "Product",
         "categories": "Category",
+        "category name": "Category name",
         "dashboard": "Dashboard",
         "name": "Product name",
         "color": "Color",

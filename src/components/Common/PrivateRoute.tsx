@@ -11,7 +11,7 @@ export const PrivateRoute = (props: RouteProps) => {
     // Otherwise, redirect to login page
 
     const isLoggedIn = Boolean(localStorage.getItem('access_token'))
-    console.log('Is logged in: ', isLoggedIn);
+    // console.log('Is logged in: ', isLoggedIn);
     
     if(!isLoggedIn) return <Redirect to="/login"/>
     return (

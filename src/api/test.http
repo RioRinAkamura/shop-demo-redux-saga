@@ -1,0 +1,25 @@
+GET https://api-json-sever-demo.herokuapp.com/api/categories
+
+###
+
+DELETE https://api-json-sever-demo.herokuapp.com/api/categories/ehktERl
+
+###
+
+POST https://api-json-sever-demo.herokuapp.com/api/categories/
+Content-Type: application/json
+
+{
+    "name": "milk"
+}
+
+###
+PUT https://api-json-sever-demo.herokuapp.com/api/categories/2518a2de-812f-4e9f-9a3c-70a639e2aed3
+Content-Type: application/json
+
+{
+    "name": "garden edit"
+}
+
+###
+DELETE  https://api-json-sever-demo.herokuapp.com/api/categories/8b04891f-cdb4-4101-9276-9ad09f10b32e
