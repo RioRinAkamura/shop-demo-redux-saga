@@ -1,5 +1,6 @@
 import { NotFound, PrivateRoute } from 'components/Common';
 import { AdminLayout } from 'components/Layout';
+import { User } from 'components/Layout/User';
 import LoginPage from 'features/auth/pages/LoginPage';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -16,6 +17,11 @@ function App() {
   return (
     <div>
       <Switch>
+        
+      <Route path="/" exact>
+          <User/>
+        </Route>
+
         <Route path="/login">
           <LoginPage/>
         </Route>

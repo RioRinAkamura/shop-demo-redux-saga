@@ -1,15 +1,12 @@
-import { CircularProgress, Input, TextField } from '@material-ui/core'
-import { Alert, Box, Button, Typography } from '@mui/material'
-import axios from 'axios'
-import { InputField } from 'components/FormFields'
-import React, { useState } from 'react'
-import {useForm} from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import { useMutation, useQuery } from 'react-query'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Input, makeStyles } from '@material-ui/core'
+import { Box, Button, Typography } from '@mui/material'
+import { borders } from '@mui/material/node_modules/@mui/system'
 import { Category } from 'models'
-import { useCategoryData } from '../hooks/useCategoryData'
-import { useHistory, useParams } from 'react-router'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { useHistory } from 'react-router'
+import * as yup from "yup"
 import { useAddCategoryData } from '../hooks/useCategoriesData'
 
 
@@ -19,10 +16,6 @@ interface RqAddCategoryProps {
     onSubmit? : (formValues : Category) => void;
 }
 
-interface CategoryId{
-    categoryId : string
-}
-
 // export function useQuery<
 //   TQueryFnData = unknown,
 //   TError = unknown,
@@ -30,8 +23,15 @@ interface CategoryId{
 //   TQueryKey extends QueryKey = QueryKey
 // >
 
+const useStyles = makeStyles({
+    input:{
+        width: '300px',
+        borders: '1px solid #888'
+    }
+})
+
 const RqAddCategory = ({initialValues, onSubmit}: RqAddCategoryProps) => {
-    const [name, setName] = useState('')
+    const classes = useStyles()
     const history= useHistory()
 
     const schema = yup.object({
@@ -53,10 +53,10 @@ const RqAddCategory = ({initialValues, onSubmit}: RqAddCategoryProps) => {
 
     return (
         <Box width={400}>
-            <Typography variant="h4">Add new category</Typography>
+            <Typography variant="h4" mb={2}>Add new category</Typography>
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
                 
-                    <Input  
+                    <Input className={classes.input}
                         {...register("name")}
                     />                   
                     <Box mt={2}>

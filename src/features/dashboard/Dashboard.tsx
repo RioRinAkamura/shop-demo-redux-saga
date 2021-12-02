@@ -1,13 +1,11 @@
 
 import { Box } from '@material-ui/core';
-import { HomeWork, ImportContacts, PhoneAndroid, SportsBaseball } from '@material-ui/icons';
 import { Grid, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ProductCheapList from './components/ProductCheapList';
 import ProductRankingList from './components/ProductRankingList';
-import StatisticItem from './components/StatisticItem';
 import Widget from './components/Widget';
 import { dashboardActions, selectDashboardLoading, selectDashboardStatistics, selectHighestProductList, selectLowestProductList } from './dashboardSlice';
 

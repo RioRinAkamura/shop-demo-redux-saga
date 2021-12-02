@@ -48,6 +48,8 @@ const ListPage = (props: ListPageProps) => {
     const categoryList = useAppSelector(selectCategoryList)
     const { t } = useTranslation();
 
+    console.log('productList from listPage', productList);
+    
     useEffect(()=>{
         dispatch(productActions.fetchProductList(filter))
     },[dispatch, filter])

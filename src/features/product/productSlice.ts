@@ -60,4 +60,4 @@ export const selectProductPagination = (state: RootState) => state.product.pagin
 
 //Reducer
 const productReducer = productSlice.reducer;
-export default productReducer;
+export default productReducer; 

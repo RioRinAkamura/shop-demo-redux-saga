@@ -1,11 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Input } from '@material-ui/core'
+import { Input, makeStyles } from '@material-ui/core'
 import { Box, Button, Typography } from '@mui/material'
-import { InputField } from 'components/FormFields'
 import { Category } from 'models'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useHistory, useParams } from 'react-router'
+import { useHistory, useLocation, useParams } from 'react-router'
 import * as yup from "yup"
 import { useSingleCategoryData, useUpdateCategoryData } from '../hooks/useCategoriesData'
 
@@ -15,11 +14,18 @@ interface RqEditCategoryProps {
     onSubmit? : (formValues : Category) => void;
 }
 
-interface CategoryId{
-    categoryId : string
-    
-}
+const useStyles = makeStyles({
+    input:{
+        width: '300px',
+        borders: '1px solid #888'
+    }
+})
 
+// interface CategoryId{
+//     categoryId : string
+    
+// }
+ 
 
 // export function useQuery<
 //   TQueryFnData = unknown,
@@ -29,23 +35,34 @@ interface CategoryId{
 // >
 
 const RqEditCategory = ({initialValues, onSubmit}: RqEditCategoryProps) => {
+    const classes = useStyles()
     const {categoryId} = useParams<{categoryId: string}>()
     // const isEdit = Boolean(categoryId)
     // const {isLoading, data, isError, error} = useCategoryData({categoryId})
     const history = useHistory()
     const {data} = useSingleCategoryData(categoryId)
-    const [name, setName] = useState(data)
+    // const [name, setName] = useState(data)
+
+    const location = useLocation()
+    const category: any = location.state
+    console.log(category);
+    const cateName = category.category.name
+    console.log(cateName);
 
     
     
-    console.log('data', data);
+        // useEffect(() => {
+        //     if(data){
+        //         setName(data.name)
+        //     }
+        //     return () => {}
+        // }, [data])
 
-    
-    // useEffect(()=>{
-    //     if(data){
-    //         setName(data.name)
-    //     }
-    // },[data])
+        // console.log('cate name: ', data);
+        // const cateName = data.name
+        // console.log('newcate Name', cateName);
+        
+        
     
     const schema = yup.object({
         name: yup.string().required('Please enter name of product'),
@@ -61,7 +78,6 @@ const RqEditCategory = ({initialValues, onSubmit}: RqEditCategoryProps) => {
 
     const handleFormSubmit= async (formValues: Category)=>{
         formValues.id = categoryId
-
         updateCate(formValues)
         history.push('/admin/categories')
     
@@ -69,10 +85,10 @@ const RqEditCategory = ({initialValues, onSubmit}: RqEditCategoryProps) => {
 
     return (
         <Box width={400}>
-            <Typography variant="h4">Update Category</Typography>
+            <Typography variant="h4" mb={2}>Update Category</Typography>
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
-                    <Input {...register("name")}
-                        defaultValue={name}
+                    <Input className={classes.input} {...register("name")}
+                        defaultValue={cateName}
                     />                   
                     <Box mt={2}>
                         <Button type="submit" variant="contained" color="primary">

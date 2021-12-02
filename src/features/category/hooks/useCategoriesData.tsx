@@ -1,11 +1,8 @@
-import {useQuery, useMutation, useQueryClient} from 'react-query'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { Category } from 'models'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 
-interface Categories {
-    
 
-}
 
 const fetchCategories = async () =>{
     const response = await axios.get('https://api-json-sever-demo.herokuapp.com/api/categories')
@@ -29,8 +26,8 @@ const removeCategory = async(id: string)=>{
 
 const updateCategory = async (editCategory : Category)=>{
     const response = await axios.put(`https://api-json-sever-demo.herokuapp.com/api/categories/${editCategory.id}`, editCategory)
-    console.log('response', response.data);
-    console.log('editCategory', editCategory);
+    // console.log('response', response.data.name);
+    // console.log('editCategory', editCategory);
     
     return response.data
 
@@ -40,7 +37,7 @@ export const useCategoriesData = ({onSuccess, onError}: any)  => {
     return useQuery('categories', fetchCategories, {
         onSuccess,
         onError
-    })
+    }) 
 }
 
 export const useSingleCategoryData = ( id:string)  => {
@@ -53,7 +50,7 @@ export const useAddCategoryData = () => {
     const queryClient = useQueryClient()
     return useMutation(addCategory, {
         onSuccess:(data)=>{
-            const newCategory = data.data
+            const newCategory = data
             console.log('newCategory', newCategory);    
             
             queryClient.setQueryData('categories', (oldQueryData:any) =>{
@@ -71,10 +68,7 @@ export const useAddCategoryData = () => {
 export const useRemoveCategoryData =()=>{
     const queryClient = useQueryClient()
     return useMutation(removeCategory, {
-        onSuccess: (data)=> {
-            console.log('data remove', data);
-            
-            // queryClient.invalidateQueries('categories')
+        onSuccess: (data)=> {            
             queryClient.removeQueries(data)
         },
         onSettled: () => {queryClient.invalidateQueries('categories')}
@@ -85,9 +79,8 @@ export const useUpdateCategoryData =()=>{
     const queryClient = useQueryClient()
     return useMutation(updateCategory, {
         onSuccess:(data)=>{
-            const newCategory = data.data
-            console.log('data from query', data);
-            
+            const newCategory = data
+            // console.log('data from query', data);
             console.log('newCategory', newCategory);  
             queryClient.setQueryData(['categories', {id: data.id}], data)
         },

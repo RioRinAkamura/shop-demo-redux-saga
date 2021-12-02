@@ -1,10 +1,8 @@
-import { Select } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { Chip, MenuItem } from '@mui/material';
 import { useAppDispatch } from 'app/hooks';
 import { authActions } from 'features/auth/authSlice';
 import React from 'react';

@@ -71,10 +71,7 @@ const CategoryTable = () => {
         setOpen(false);
     }
 
-    const onSuccess = (data: any)=>{
-      // console.log('success :', data);
-      
-    }
+    const onSuccess = ()=>{} 
     const onError = ()=>{}
 
     //fetch data
@@ -99,10 +96,6 @@ const CategoryTable = () => {
       setOpen(false)
     }
 
-    //edit
-    const handleEditClick= async(category: Category)=>{
-      history.push(`${match.url}/${category.id}`)
-    }
 
     return (
         <>
@@ -125,12 +118,17 @@ const CategoryTable = () => {
         </TableHead>
         <TableBody>
           {data && data.map((category: Category, index: number) => (
-            <StyledTableRow key={category?.id}>
+            <StyledTableRow key={category.id}>
               <StyledTableCell align="left">{index + 1}</StyledTableCell>
-              <StyledTableCell align="left">{category?.id}</StyledTableCell>
-              <StyledTableCell align="left">{category?.name}</StyledTableCell>
+              <StyledTableCell align="left">{category.id}</StyledTableCell>
+              <StyledTableCell align="left">{category.name}</StyledTableCell>
               <StyledTableCell>
-                    <EditIcon className={classes.action} color="primary" onClick={()=> handleEditClick(category)}/>&nbsp;
+                    <Link to={{
+                      pathname:`${match.url}/${category.id}`,
+                      state: {category}
+                    }}>
+                        <EditIcon className={classes.action} color="primary"/>
+                    </Link>
                     <DeleteIcon className={classes.action} color="secondary" onClick={()=> handleRemoveClick(category)}/>
             </StyledTableCell>
             </StyledTableRow>
