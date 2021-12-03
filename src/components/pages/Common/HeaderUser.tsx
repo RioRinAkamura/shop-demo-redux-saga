@@ -2,7 +2,9 @@ import AppBar from '@material-ui/core/AppBar';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { CardMedia } from '@mui/material';
 import React from 'react';
+import logo from '../../../../src/assets/logo.png'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logo:{
       marginLeft: '0px',
+    },
+    logoImg:{
+      width: '52px !important',
+      height: '52px !important',
+      objectFit: 'contain!important' as 'contain'
     },
     menu:{
         display: 'flex',
@@ -57,9 +64,14 @@ const HeaderUser = (props: HeaderUserProps) => {
       <div className={classes.root}>
         <AppBar position="static" className={classes.appbar}>
           <Toolbar>
-            
+          <CardMedia className={classes.logoImg}
+                    component="img"
+                    alt="Aka shop"
+                    image={logo}
+                    title="Aka shop"
+                    />
             <Typography variant="h6" className={classes.logo}>
-              ShopDemo
+              Aka
             </Typography>
               <div className={classes.menu} >
                 <Typography variant="h6" className={classes.title}>

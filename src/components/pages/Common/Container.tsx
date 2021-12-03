@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     display: 'flex', 
     flexDirection:'column' ,
     alignItems:'flex-end', 
-    marginBottom: '12px',
+    marginBottom: '8px',
     marginRight: '4px'
   },
   rating:{
