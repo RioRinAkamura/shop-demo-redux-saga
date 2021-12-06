@@ -10,34 +10,32 @@ interface Category {
     name: string
 }
 
-// const fetchCategories = () =>{
-//     return axios.get('https://api-json-sever-demo.herokuapp.com/api/categories')
-// }
 
 const Category = () => {
 
-    const match=useRouteMatch()
+    const match = useRouteMatch()
+    console.log('match.path', match.path);
+    
     
     return (
         <Box>
             <Switch>
-                <Route path={match.path} exact>
-                    {/* <CategoryTable categoryList={data?.data}/> */}
-                    <CategoryTable />
-                </Route>
-
                 <Route path={`${match.path}/add`}>
+
                     <RqAddCategory />
                 </Route>
 
                 <Route path={`${match.path}/:categoryId`} exact>
                     <RqEditCategory />
                 </Route>
+
+                <Route path={match.path} exact>
+                    <CategoryTable/>
+                </Route>
+
+                
             </Switch>
             
-            {/* {data?.data.map((category: CategoriesProps)=>
-                    <div key={category.id}>{category.name}</div>
-                )} */}
         </Box>
     )
 }

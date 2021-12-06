@@ -18,21 +18,25 @@ function App() {
     <div>
       <Switch>
         
-      <Route path="/" exact>
-          <User/>
-        </Route>
-
-        <Route path="/login">
-          <LoginPage/>
-        </Route>
-
         <PrivateRoute path="/admin">
-          <AdminLayout/>  
-        </PrivateRoute>
+            <AdminLayout/>  
+          </PrivateRoute>
 
-        <Route >
+          <Route path="/login">
+            <LoginPage/>
+          </Route>
+
+          <Route path="/">
+            <User/>
+          </Route>
+
+        
+
+        
+
+        {/* <Route >
           <NotFound/>
-        </Route>
+        </Route> */}
 
       </Switch>
       <ToastContainer

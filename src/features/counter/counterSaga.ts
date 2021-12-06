@@ -1,6 +1,5 @@
-import { call, delay, put, takeEvery } from "@redux-saga/core/effects";
+import { delay, put, takeEvery } from "@redux-saga/core/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { fetchCount } from "./counterAPI";
 import { incrementSaga, incrementSagaSuccess } from "./counterSlice";
 
 // export function* log(action: PayloadAction) {

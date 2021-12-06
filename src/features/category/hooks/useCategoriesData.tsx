@@ -67,7 +67,7 @@ export const useAddCategoryData = () => {
 
 export const useRemoveCategoryData =()=>{
     const queryClient = useQueryClient()
-    return useMutation(removeCategory, {
+    return useMutation(removeCategory, { 
         onSuccess: (data)=> {            
             queryClient.removeQueries(data)
         },

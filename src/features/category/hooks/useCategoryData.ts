@@ -10,6 +10,11 @@ const fetchCategory = ({queryKey}:any) =>{
     return axios.get(`https://api-json-sever-demo.herokuapp.com/api/categories/${categoryId}`)
 }
 
+
 export const useCategoryData =({categoryId }: CategoryId)=>{
     return useQuery(['category', categoryId], fetchCategory)
+}
+
+export const useSingleCategoryData =({categoryId }: CategoryId)=>{
+
 }

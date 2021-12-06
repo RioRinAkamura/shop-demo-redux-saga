@@ -53,7 +53,7 @@ export const AdminLayout = () => {
             <Box className={classes.main}>
                 <Switch>
                     <Route path="/admin/dashboard">
-                        <Dashboard/>
+                        <Dashboard/>                        
                     </Route>
 
                     <Route path="/admin/products">

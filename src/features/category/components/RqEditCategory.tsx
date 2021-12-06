@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Input, makeStyles } from '@material-ui/core'
 import { Box, Button, Typography } from '@mui/material'
 import { Category } from 'models'
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useHistory, useLocation, useParams } from 'react-router'
 import * as yup from "yup"
@@ -40,7 +40,7 @@ const RqEditCategory = ({initialValues, onSubmit}: RqEditCategoryProps) => {
     // const isEdit = Boolean(categoryId)
     // const {isLoading, data, isError, error} = useCategoryData({categoryId})
     const history = useHistory()
-    const {data} = useSingleCategoryData(categoryId)
+    // const {data} = useSingleCategoryData(categoryId)
     // const [name, setName] = useState(data)
 
     const location = useLocation()

@@ -11,13 +11,14 @@ import { store } from './app/store';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import {ReactQueryDevtools} from 'react-query/devtools'
+import { BrowserRouter } from 'react-router-dom';
 
 const queryClient = new QueryClient()
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <BrowserRouter> */}
+      <BrowserRouter>
         <ConnectedRouter history={history}>
           <QueryClientProvider client={queryClient}>
             <I18nextProvider i18n={i18n}>
@@ -25,10 +26,10 @@ ReactDOM.render(
                 <App />
               </Suspense>
             </I18nextProvider>
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-right"/>
+          {/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right"/> */}
           </QueryClientProvider>
         </ConnectedRouter>
-      {/* </BrowserRouter> */}
+      </BrowserRouter>
       
     </Provider>
   </React.StrictMode>,

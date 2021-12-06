@@ -43,12 +43,16 @@ const RqAddCategory = ({initialValues, onSubmit}: RqAddCategoryProps) => {
         resolver: yupResolver(schema)
     });
 
+    console.log('category page');
+    
+
     const {mutate: addNewCate} = useAddCategoryData()
     const handleFormSubmit= async (formValues: any)=>{
         addNewCate(formValues)
         
         
         history.push('/admin/categories') 
+
     }
 
     return (
