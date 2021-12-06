@@ -8,7 +8,7 @@ export interface NotFoundProps {
 export const NotFound = (props: NotFoundProps) => {
     return (
         <div>
-            NOT FOUND
+            NOT FOUND Page
         </div>
     )
 }
