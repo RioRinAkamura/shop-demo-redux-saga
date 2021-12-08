@@ -1,21 +1,31 @@
+import { createStyles, Input, makeStyles, TextField, Theme } from '@material-ui/core';
 import {
   Avatar,
   Box,
   Button, CircularProgress, Container,
-  CssBaseline, TextField, Typography
+  CssBaseline, Typography
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import React, { FormEvent } from 'react';
-import { authActions, LoginPayload } from '../authSlice';
+import React from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
-import { User } from 'models';
-import { Input } from '@material-ui/core';
 import { useHistory } from 'react-router';
+import { authActions, LoginPayload } from '../authSlice';
 
 
 interface LoginPageProps {}
 
+const useStyles = makeStyles((theme: Theme)=>{
+  createStyles({
+    userInput:{
+      border: '1px solid rgba(15,15,15 , .3) ',
+      borderRadius: '5px',
+      marginBottom: '16px'
+    }
+  })
+})
+
 const LoginPage = (props: LoginPageProps) => {
+  const classes = useStyles()
   const { register, handleSubmit } = useForm();
   const history = useHistory()
 
@@ -50,13 +60,13 @@ const LoginPage = (props: LoginPageProps) => {
             Sign in
           </Typography>
           
-            <Input
+            <TextField variant="outlined" size="small" placeholder="username" label="username" 
               {...register("username", { required: true, maxLength: 20 })}
               required
               fullWidth
               id="email"
             />
-            <Input
+            <TextField variant="outlined" size="small" placeholder="password" label="password" 
               {...register("password", { required: true, maxLength: 20 })}
               required
               fullWidth

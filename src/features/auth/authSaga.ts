@@ -30,7 +30,7 @@ function* handleLogin(payload: LoginPayload){
 function* handleLogout(){
     yield delay(500);
     // localStorage.removeItem('access_token')
-    localStorage.removeItem('user')
+    localStorage.removeItem('username')
 
     //Redirect to Login page
     yield put(push('/login'))
@@ -39,7 +39,7 @@ function* handleLogout(){
 function* watchLoginFlow(){
     while(true){        
         // const isLoggedIn = Boolean(localStorage.getItem('access_token'));
-        const isLoggedIn = Boolean(localStorage.getItem('user'));
+        const isLoggedIn = Boolean(localStorage.getItem('username'));
         if(!isLoggedIn){
             const action: PayloadAction<LoginPayload> = yield take(authActions.login.type);
             yield fork(handleLogin, action.payload)
