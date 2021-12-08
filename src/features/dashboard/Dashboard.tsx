@@ -20,9 +20,9 @@ const Dashboard = (props: Props) => {
   const highestProductList = useAppSelector(selectHighestProductList)
   const lowestProductList = useAppSelector(selectLowestProductList)
 
-  console.log({
-    loading, statistics, highestProductList, lowestProductList
-  });
+  // console.log({
+  //   loading, statistics, highestProductList, lowestProductList
+  // });
   
   
   useEffect(()=>{

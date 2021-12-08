@@ -9,13 +9,16 @@ export interface LoginPayload{
 export interface AuthState{
     isLoggedIn: boolean;
     logging?: boolean;
-    currentUser?: User;
+    currentUser: User ;
 }
 
 const initialState: AuthState ={
     isLoggedIn: false,
     logging: false,
-    currentUser: undefined,
+    currentUser: {
+        id: '',
+        name: ''
+    },
 }
 
 const authSlice = createSlice({
@@ -35,7 +38,7 @@ const authSlice = createSlice({
 
         logout(state) {
             state.isLoggedIn= false;
-            state.currentUser = undefined;
+            state.currentUser = {id: '', name: ''};
         },
 
     }
@@ -47,6 +50,7 @@ export const authActions = authSlice.actions;
 //Selectors
 export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
 export const selectIsLogging = (state: any) => state.auth.logging;
+export const selectIsUser = (state: any) => state.auth.currentUser;
 
 //Reducers
 

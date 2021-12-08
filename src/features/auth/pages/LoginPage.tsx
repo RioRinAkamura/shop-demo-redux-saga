@@ -5,35 +5,37 @@ import {
   CssBaseline, TextField, Typography
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import React from 'react';
-import { authActions } from '../authSlice';
+import React, { FormEvent } from 'react';
+import { authActions, LoginPayload } from '../authSlice';
+import { SubmitHandler, useForm } from "react-hook-form";
+import { User } from 'models';
+import { Input } from '@material-ui/core';
+import { useHistory } from 'react-router';
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         color: '#333'
-//     },
-// }));
 
 interface LoginPageProps {}
 
 const LoginPage = (props: LoginPageProps) => {
+  const { register, handleSubmit } = useForm();
+  const history = useHistory()
+
   // const classes = useStyles()
   const dispatch = useAppDispatch();
   const isLogging =useAppSelector(state => state.auth.logging)
 
-  const handleLogin =()=>{
-    // Todo: get username + password from login form
+  const handleLogin: SubmitHandler<LoginPayload> =(data, event)=> {
 
-    dispatch(authActions.login({
-        username:'',
-        password: ''
-    }))
+    event?.preventDefault()
+    console.log('user: ' ,data);
+    dispatch(authActions.login(data))
+    console.log('da di toi day roi');
+    
+    history.push('/admin')
   }
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(handleLogin)}>
       <Container component="main" maxWidth="xs">
-        
         <CssBaseline />
         <Box
           sx={{
@@ -47,36 +49,29 @@ const LoginPage = (props: LoginPageProps) => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
+          
+            <Input
+              {...register("username", { required: true, maxLength: 20 })}
               required
               fullWidth
               id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
             />
-            <TextField
-              margin="normal"
+            <Input
+              {...register("password", { required: true, maxLength: 20 })}
               required
               fullWidth
-              name="password"
-              label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
 
-            <Button type="button" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleLogin}>
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               {isLogging && <CircularProgress size={20} color="info" />}&nbsp;
                Sign In
             </Button>
           </Box>
-        </Box>
+        
       </Container>
-    </div>
+    </form>
   );
 };
 

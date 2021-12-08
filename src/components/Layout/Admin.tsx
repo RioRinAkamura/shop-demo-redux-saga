@@ -3,10 +3,11 @@
 import { makeStyles } from '@material-ui/core';
 import { Box } from '@mui/material';
 import { Header, Sidebar } from 'components/Common';
+import { UserContext } from 'context/UserContext';
 import Category from 'features/category/Category';
 import  Dashboard  from 'features/dashboard/Dashboard';
 import {Product} from 'features/product/Product';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Switch } from 'react-router';
 
 const useStyles = makeStyles(theme => ({
@@ -41,6 +42,10 @@ const useStyles = makeStyles(theme => ({
 
 
 export const AdminLayout = () => {
+    const user = useContext(UserContext)
+    
+    console.log('user login: ', user);
+    
     const classes = useStyles();
     return (
         <Box className={classes.root}>

@@ -12,6 +12,7 @@ import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import {ReactQueryDevtools} from 'react-query/devtools'
 import { BrowserRouter } from 'react-router-dom';
+import { UserContext } from 'context/UserContext';
 
 const queryClient = new QueryClient()
 
@@ -23,7 +24,9 @@ ReactDOM.render(
           <QueryClientProvider client={queryClient}>
             <I18nextProvider i18n={i18n}>
               <Suspense fallback={<div>loading</div>}>
-                <App />
+               
+                  <App />
+               
               </Suspense>
             </I18nextProvider>
           {/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right"/> */}
