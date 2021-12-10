@@ -1,15 +1,16 @@
 
 import { makeStyles } from "@material-ui/core"
 import { Box, Container } from "@mui/material"
+import ProductInfo from "components/Cart/ProductInfo"
 import Body from "components/pages/Common/Body"
 import BodyByCateId from "components/pages/Common/BodyByCateId"
+import Cart from "components/pages/Common/Cart"
 import Footer from "components/pages/Common/Footer"
 import HeaderUser from "components/pages/Common/HeaderUser"
 import SidebarUser from "components/pages/Common/SidebarUser"
-import { useProductsByCateId, useProductsData } from "components/pages/hooks/useProductsData"
+import { useProductsData } from "components/pages/hooks/useProductsData"
 import { useCategoriesData } from "features/category/hooks/useCategoriesData"
-import { Product } from "models"
-import { Route, Switch, useParams, useRouteMatch } from "react-router"
+import { Route, Switch, useRouteMatch } from "react-router"
 
 
 
@@ -42,6 +43,7 @@ const useStyles = makeStyles(theme => ({
     },
     container:{
         gridArea: 'container',
+        width: '100%',
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(2,3)
     },
@@ -84,43 +86,33 @@ export const User = (props: UserProps) => {
                 <Box className={classes.sidebar}>
                     <SidebarUser categoryList={categories}/>
                 </Box>
-
                 <Box className={classes.container}>
-                    
-                        <Switch>
-                            <Route path="/products/:cateId">
-                                <BodyByCateId />
-                            </Route>
+                    <Switch>
+                        <Route path="/categories/:cateId">
+                            <BodyByCateId />
+                        </Route>
 
-                            <Route path="/" exact>
-                                <Body productList={productList}/>
-                            </Route>
-                            
-                            <Route path="/products" exact>
-                                <Body productList={productList}/>
-                            </Route>
-
-                            
-
-                            
-                        </Switch>
-
-                        {/* <Switch>
-                            <Route path="/">
-                                <Body productList={productList}/>
-                            </Route>
-                            {productList.map((product: Product) =>(
-                                <Route path={`/products?_name=${product.categoryId}`} key={product.id}>
-                                    <Body productList={productList}/>
-                                </Route>
-                            ))}
+                        <Route path="/" exact>
+                            <Body productList={productList}/>
+                        </Route>
                         
-                        </Switch> */}
-                </Box>
+                        <Route path="/categories" exact>
+                            <Body productList={productList}/>
+                        </Route>
 
+                        <Route path="/cart" exact>
+                            <Cart />
+                        </Route>
+
+                        <Route path="/products/:productId">
+                            <ProductInfo />
+                        </Route>
+                    </Switch>
+                </Box>
                 <Box className={classes.footer}>
                     <Footer />
                 </Box>
+
             </Box>
         </Container>
 

@@ -31,7 +31,7 @@ const LoginPage = (props: LoginPageProps) => {
 
   // const classes = useStyles()
   const dispatch = useAppDispatch();
-  const isLogging =useAppSelector(state => state.auth.logging)
+  const isLogging =useAppSelector(state => state.authReducer.logging)
 
   const handleLogin: SubmitHandler<LoginPayload> =(data, event)=> {
 

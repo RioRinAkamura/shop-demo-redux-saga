@@ -2,10 +2,14 @@ import AppBar from '@material-ui/core/AppBar';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { Box, CardMedia, Container } from '@mui/material';
+import { Badge, Box, CardMedia, Container } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../../src/assets/logo.png';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { useAppSelector } from 'app/hooks';
+import { getNumberItems } from 'components/Cart/cartSlice';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +33,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
     title: {
       flexGrow: 1,
-      marginLeft: '24px'
+      marginLeft: '24px',
+      textDecoration: 'none',
+      color: '#333',
+      fontSize: '18px',
+      fontWeight: 500
     },
     logo:{
       marginLeft: '0px',
@@ -59,7 +67,7 @@ interface HeaderUserProps {
 
 const HeaderUser = (props: HeaderUserProps) => {
     const classes = useStyles();
-
+    const numberItems = useAppSelector(getNumberItems)
   
     return (
       <div className={classes.root}>
@@ -80,18 +88,25 @@ const HeaderUser = (props: HeaderUserProps) => {
               </Link>
             </Box>
             <div className={classes.menu} >
-              <Typography variant="h6" className={classes.title}>
+              <Link to="/shop"  className={classes.title}>
                   Shop
-              </Typography>
-              <Typography variant="h6" className={classes.title}>
+              </Link>
+              <Link to="/about"  className={classes.title}>
                   About
-              </Typography>
-              <Typography variant="h6" className={classes.title}>
+              </Link>
+              <Link to="/blog"  className={classes.title}>
                   Blog
-              </Typography>
-              <Typography variant="h6" className={classes.title}>
+              </Link>
+              <Link to="/contact"  className={classes.title}>
                   Contact
-              </Typography>
+              </Link>
+
+              <Link to="/cart">
+                <Badge badgeContent={numberItems} color="secondary" className={classes.title}>
+                    <ShoppingCartIcon />
+                </Badge>
+              </Link>
+              
             </div>          
           </Toolbar>
           </Container>

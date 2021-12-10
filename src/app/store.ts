@@ -9,14 +9,17 @@ import { history } from 'utils';
 import dashboardReducer from 'features/dashboard/dashboardSlice';
 import productReducer from 'features/product/productSlice';
 import categoryReducer from 'features/category/categorySlice';
+import cartReducer from 'components/Cart/cartSlice';
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
   counter: counterReducer,
-  auth: authReducer,
-  dashboard: dashboardReducer,
-  product: productReducer,
-  category: categoryReducer,
+  
+  authReducer,
+  dashboardReducer,
+  productReducer,
+  categoryReducer,
+  cartReducer,
  
 })
 

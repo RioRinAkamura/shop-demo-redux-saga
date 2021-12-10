@@ -16,8 +16,34 @@ function* fetchProductList(action: PayloadAction<ListParams>){
 
 }
 
+function* fetchProductListData(){
+    try {
+        const response: Product[] = yield call(productApi.getAllProduct)
+        yield put(productActions.fetchProductListDataSuccess(response))
+        
+    } catch (error) {
+        console.log('failed to fetch product list data', error);
+        yield put(productActions.fetchProductListDataFailed())
+    }
+
+}
+
+function* fetchProductById(action: PayloadAction<string>){
+    try {
+        const response: Product = yield call(productApi.getById, action.payload)
+        console.log('response from product saga: ', response);
+        
+        yield put(productActions.fetchProductByIdSuccess(response))
+        
+    } catch (error) {
+        console.log('failed to fetch product by Id', error);
+        yield put(productActions.fetchProductByIdFailed())
+    }
+
+}
+
 function* handleSearchDeboune(action: PayloadAction<ListParams>){
-    console.log('product saga');
+    // console.log('product saga');
     
     yield put(productActions.setFilter(action.payload));
 }
@@ -25,6 +51,10 @@ function* handleSearchDeboune(action: PayloadAction<ListParams>){
 export default function* productSaga(){
 
     yield takeLatest(productActions.fetchProductList, fetchProductList)
+
+    yield takeLatest(productActions.fetchProductListData, fetchProductListData)
+
+    yield takeLatest(productActions.fetchProductById, fetchProductById)
 
     yield debounce(500, productActions.setFilterWithDebounce.type, handleSearchDeboune)
 }

@@ -27,6 +27,24 @@ const productSlice = createSlice({
     name:'product',
     initialState: initialState,
     reducers:{
+        //get all product without listparams
+        fetchProductListData(state){
+            state.loading = true
+        },
+
+        fetchProductListDataSuccess(state, action :PayloadAction<Product[]>){
+            state.list = action.payload;
+            console.log('action.payload from productSlice:', action.payload);
+            
+            state.loading = false
+        },
+        fetchProductListDataFailed(state){
+            state.loading = false
+        },
+
+
+
+
         fetchProductList(state, action: PayloadAction<ListParams>){
             state.loading = true
         },
@@ -37,6 +55,20 @@ const productSlice = createSlice({
             state.loading = false
         },
         fetchProductListFailed(state){
+            state.loading = false
+        },
+
+        fetchProductById(state, action: PayloadAction<string>){
+            state.loading = true
+            
+        },
+
+        fetchProductByIdSuccess(state, action :PayloadAction<Product>){
+            state.list = [];
+            state.list.push(action.payload)
+            state.loading = false
+        },
+        fetchProductByIdFailed(state){
             state.loading = false
         },
 
@@ -52,11 +84,10 @@ const productSlice = createSlice({
 export const productActions = productSlice.actions;
 
 //Selectors
-export const selectProductList = (state: RootState) => state.product.list;
-export const selectProductLoading = (state: RootState) => state.product.loading;
-export const selectProductFilter = (state: RootState) => state.product.filter;
-export const selectProductPagination = (state: RootState) => state.product.pagination;
-
+export const selectProductList = (state: RootState) => state.productReducer.list;
+export const selectProductLoading = (state: RootState) => state.productReducer.loading;
+export const selectProductFilter = (state: RootState) => state.productReducer.filter;
+export const selectProductPagination = (state: RootState) => state.productReducer.pagination;
 
 //Reducer
 const productReducer = productSlice.reducer;

@@ -1,7 +1,8 @@
 import { useAppSelector } from 'app/hooks';
-import { NotFound, PrivateRoute } from 'components/Common';
+import { PrivateRoute } from 'components/Common';
 import { AdminLayout } from 'components/Layout';
 import { User } from 'components/Layout/User';
+import Cart from 'components/pages/Common/Cart';
 import { UserContext } from 'context/UserContext';
 import LoginPage from 'features/auth/pages/LoginPage';
 import React from 'react';
@@ -15,7 +16,7 @@ function App() {
   //   categoryApi.getAll().then((response)=>console.log(response));
 
   // })
-  const currentUser = useAppSelector(state => state.auth.currentUser)
+  const currentUser = useAppSelector(state => state.authReducer.currentUser)
 
   return (
       <UserContext.Provider value = {currentUser}>
@@ -29,16 +30,11 @@ function App() {
                   <LoginPage/>
                 </Route>
 
-              <Route path="/">
-                <User/>
-              </Route>
-
-            
-            {/* <Route >
-              <NotFound/>
-            </Route> */}
-
+                <Route path="/">
+                  <User/>
+                </Route>
           </Switch>
+          
           <ToastContainer
               position="bottom-right"
               autoClose={3000}

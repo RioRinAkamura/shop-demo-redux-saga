@@ -9,6 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Pagination } from '@material-ui/lab';
 import { Box, Rating } from '@mui/material';
+import { useAppDispatch } from 'app/hooks';
+import { cartActions } from 'components/Cart/cartSlice';
 import { Product } from 'models';
 import React, { useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router';
@@ -58,6 +60,7 @@ interface CateParam{
 }
 
 const BodyByCateId = ({productList}: ContainerProps) => {
+    const dispatch = useAppDispatch()
     const classes = useStyles()
     const history= useHistory()
     const location = useLocation()
@@ -65,7 +68,7 @@ const BodyByCateId = ({productList}: ContainerProps) => {
     const pageNumber = parseInt(useQuery().get("_page") || "1");
 
     const {data: listProductbyCateId} = useProductsByCateId({categoryId : cateId, pageNumber})
-    console.log('listProductbyCateId', listProductbyCateId);
+    // console.log('listProductbyCateId', listProductbyCateId);
     const [pageNumberProduct, setPageNumberProduct] = useState(1)
     const [value, setValue] = React.useState<number | null>(4);
 
@@ -79,8 +82,14 @@ const BodyByCateId = ({productList}: ContainerProps) => {
         console.log(value);
         
         setPageNumberProduct(value);
-        history.push(`/products/${cateId}?_page=${value}`)
+        history.push(`/categories/${cateId}?_page=${value}`)
       };
+
+      const handleClickProduct =(product: Product)=>{
+        history.push(`/products/${product.id}`)
+    }
+
+
 
     return (
         <Box style={{marginTop:'64px'}}>
@@ -91,7 +100,7 @@ const BodyByCateId = ({productList}: ContainerProps) => {
         {listProductbyCateId?.data && listProductbyCateId?.data.map((product : Product) =>(
             <Grid item key={product.id} xs={12} sm={6} lg={3}>
                 <Card className={classes.card} >
-                    <CardActionArea>
+                    <CardActionArea onClick={()=> handleClickProduct(product)}>
                         <CardMedia
                             component="img"
                             alt="Contemplative Reptile"
@@ -117,7 +126,12 @@ const BodyByCateId = ({productList}: ContainerProps) => {
                         </CardContent>
                     </CardActionArea>
                 <CardActions className={classes.cardAction}>
-                    <Button variant="contained" size="small" color="primary" style={{marginLeft: '0px'}}>
+                    <Button 
+                    variant="contained" 
+                    size="small" color="primary" 
+                    style={{marginLeft: '0px'}}
+                    onClick={() => dispatch(cartActions.addToCart(product.id))}
+                    >
                         Add to card
                     </Button>
                 </CardActions>

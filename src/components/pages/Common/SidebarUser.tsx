@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textDecoration:'none',
       color: 'inherit',
 
+
       '&.active > div':{
         backgroundColor: theme.palette.action.focus,
       }
@@ -57,11 +58,11 @@ const SidebarUser = ({categoryList}: SidebarUserProps) => {
             <Box>
                 <List component="nav" aria-label="main mailbox folders">
                     {categoryList && categoryList.map((category : Category) => (
-                        <ListItem button key={category.id}>
-                            <NavLink to={`/products/${category.id}`} className={classes.link}>                        
+                      <NavLink to={`/categories/${category.id}`} className={classes.link}>                        
+                        <ListItem button key={category.id} >
                                 <ListItemText primary={category.name}/>
-                            </NavLink>
                         </ListItem>
+                      </NavLink>
                     ))}
 
                 </List>

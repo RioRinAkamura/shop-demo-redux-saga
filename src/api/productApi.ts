@@ -2,6 +2,11 @@ import { ListParams, ListResponse, Product } from "models"
 import axiosClient from "./axiosClient"
 
 const productApi={
+    getAllProduct():Promise<Product[]> {
+        const url='/products'
+        return axiosClient.get(url);
+    },
+
     getAll(params: ListParams):Promise<ListResponse<Product>> {
         const url='/products'
         return axiosClient.get(url, {params});

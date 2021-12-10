@@ -60,10 +60,10 @@ export const dashboardActions = dashboardSlice.actions;
 
 
 //Selectors
-export const selectDashboardLoading = (state: RootState)=> state.dashboard.loading;
-export const selectDashboardStatistics = (state: RootState)=> state.dashboard.statistics;
-export const selectHighestProductList = (state: RootState)=> state.dashboard.highestProductList;
-export const selectLowestProductList = (state: RootState)=> state.dashboard.lowestProductList;
+export const selectDashboardLoading = (state: RootState)=> state.dashboardReducer.loading;
+export const selectDashboardStatistics = (state: RootState)=> state.dashboardReducer.statistics;
+export const selectHighestProductList = (state: RootState)=> state.dashboardReducer.highestProductList;
+export const selectLowestProductList = (state: RootState)=> state.dashboardReducer.lowestProductList;
 
 
 //Reducers

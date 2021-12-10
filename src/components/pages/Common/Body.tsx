@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { createTheme, Grid } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { Category, Product } from 'models';
-import { Box, Rating } from '@mui/material';
-import { Grid, createTheme } from '@material-ui/core';
-import { useProductsByCateId, useProductsPaginated } from '../hooks/useProductsData';
 import { Pagination } from '@material-ui/lab';
-import { useHistory, useLocation, useParams, useRouteMatch } from 'react-router';
-import axios from 'axios';
+import { Box, Rating } from '@mui/material';
+import { useAppDispatch } from 'app/hooks';
+import { Product } from 'models';
+import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
+import { useProductsPaginated } from '../hooks/useProductsData';
+import {cartActions} from '../../Cart/cartSlice'
 
 const theme = createTheme();
 const useStyles = makeStyles({
@@ -62,6 +63,7 @@ interface PageNumber{
 }
 
 const Body = ({productList}: ContainerProps) => {
+    const dispatch = useAppDispatch()
     const history= useHistory()
 
     const location = useLocation()
@@ -72,7 +74,7 @@ const Body = ({productList}: ContainerProps) => {
       }
       const page = parseInt(useQuery().get("_page") || "1");
 
-      console.log('search page: ', page);
+    //   console.log('search page: ', page);
 
     const [value, setValue] = React.useState<number | null>(4);
 
@@ -86,8 +88,12 @@ const Body = ({productList}: ContainerProps) => {
 
     const handlePageChange= (event: React.ChangeEvent<unknown>, value: number) => {
         setPageNumberProduct(value);
-        history.push(`/products?_page=${value}`)
+        history.push(`/categories?_page=${value}`)
       };
+
+      const handleClickProduct =(product: Product)=>{
+          history.push(`/products/${product.id}`)
+      }
 
     return (
         <Box style={{marginTop:'64px'}}>
@@ -97,8 +103,8 @@ const Body = ({productList}: ContainerProps) => {
             
         {listProductPaginated?.data && listProductPaginated?.data.map((product : Product) =>(
             <Grid item key={product.id} xs={12} sm={6} lg={3}>
-                <Card className={classes.card} >
-                    <CardActionArea>
+                <Card className={classes.card}>
+                    <CardActionArea  onClick={()=> handleClickProduct(product)}>
                         <CardMedia
                             component="img"
                             alt="Contemplative Reptile"
@@ -124,7 +130,13 @@ const Body = ({productList}: ContainerProps) => {
                         </CardContent>
                     </CardActionArea>
                 <CardActions className={classes.cardAction}>
-                    <Button variant="contained" size="small" color="primary" style={{marginLeft: '0px'}}>
+                    <Button 
+                        variant="contained"
+                        size="small" 
+                        color="primary" 
+                        style={{marginLeft: '0px'}}
+                        onClick={() => dispatch(cartActions.addToCart(product.id))}
+                    >
                         Add to card
                     </Button>
                 </CardActions>
@@ -143,6 +155,7 @@ const Body = ({productList}: ContainerProps) => {
                 />
             </Box>
         </Box>
+            
         </Box>
     )
 }
