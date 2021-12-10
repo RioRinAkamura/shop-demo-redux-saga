@@ -58,8 +58,8 @@ const SidebarUser = ({categoryList}: SidebarUserProps) => {
             <Box>
                 <List component="nav" aria-label="main mailbox folders">
                     {categoryList && categoryList.map((category : Category) => (
-                      <NavLink to={`/categories/${category.id}`} className={classes.link}>                        
-                        <ListItem button key={category.id} >
+                      <NavLink to={`/categories/${category.id}`} key={category.id}  className={classes.link}>                        
+                        <ListItem button >
                                 <ListItemText primary={category.name}/>
                         </ListItem>
                       </NavLink>

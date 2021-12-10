@@ -34,8 +34,7 @@ const productSlice = createSlice({
 
         fetchProductListDataSuccess(state, action :PayloadAction<Product[]>){
             state.list = action.payload;
-            console.log('action.payload from productSlice:', action.payload);
-            
+            // console.log('action.payload from productSlice:', action.payload);
             state.loading = false
         },
         fetchProductListDataFailed(state){
